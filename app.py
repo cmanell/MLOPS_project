@@ -1,5 +1,5 @@
 import joblib
-import numpy as np
+import pandas as pd
 import streamlit as st
 from pathlib import Path
 
@@ -256,17 +256,14 @@ def main():
         st.markdown('</div>', unsafe_allow_html=True)
 
     if predict:
-        features = np.array(
-            [[
-                credit_lines_outstanding,
-                loan_amt_outstanding,
-                total_debt_outstanding,
-                income,
-                years_employed,
-                fico_score,
-            ]],
-            dtype=float,
-        )
+        features = pd.DataFrame([{
+            "credit_lines_outstanding": credit_lines_outstanding,
+            "loan_amt_outstanding": loan_amt_outstanding,
+            "total_debt_outstanding": total_debt_outstanding,
+            "income": income,
+            "years_employed": years_employed,
+            "fico_score": fico_score,
+        }])
 
         features_scaled = scaler.transform(features)
         prediction = int(model.predict(features_scaled)[0])
