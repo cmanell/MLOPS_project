@@ -1,8 +1,11 @@
 mlruns/
-models/
 __pycache__/
-*.joblib
 .ipynb_checkpoints/
 .DS_Store
 mlflow.db
 .csv
+
+# Ignore all joblib files except the deployed models
+*.joblib
+!models/best_model.joblib
+!models/scaler.joblib
