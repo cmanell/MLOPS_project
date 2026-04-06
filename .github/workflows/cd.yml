@@ -4,44 +4,35 @@ on:
   push:
     branches:
       - main
+      - develop_Talib
 
 jobs:
   deploy:
-    name: Build, Push & Deploy
+    name: Build, Push & Deploy to Azure
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: Login to Azure
+        uses: azure/login@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+      - name: Login to Azure Container Registry
+        run: az acr login --name creditdefaultapp
 
-      - name: Build, tag and push image to ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-          IMAGE_TAG: ${{ github.sha }}
+      - name: Build and push image to ACR
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t creditdefaultapp.azurecr.io/credit-default-app:${{ github.sha }} .
+          docker build -t creditdefaultapp.azurecr.io/credit-default-app:latest .
+          docker push creditdefaultapp.azurecr.io/credit-default-app:${{ github.sha }}
+          docker push creditdefaultapp.azurecr.io/credit-default-app:latest
 
-      - name: Deploy to App Runner
-        uses: awslabs/amazon-app-runner-deploy@main
-        with:
-          service: ${{ secrets.APP_RUNNER_SERVICE_NAME }}
-          image: ${{ steps.build-image.outputs.image }}
-          access-role-arn: ${{ secrets.APP_RUNNER_ROLE_ARN }}
-          region: ${{ secrets.AWS_REGION }}
-          port: 8501
-          wait-for-service-stability-seconds: 180
+      - name: Deploy to Azure Container Apps
+        run: |
+          az containerapp update \
+            --name credit-default-app \
+            --resource-group rgsda2026 \
+            --image creditdefaultapp.azurecr.io/credit-default-app:${{ github.sha }}
