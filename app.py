@@ -17,7 +17,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background: linear-gradient(135deg, #f6f8fc 0%, #eef3ff 100%);
+        background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
     }
     .block-container {
         padding-top: 2rem;
@@ -25,12 +25,13 @@ st.markdown(
         max-width: 1150px;
     }
     .hero-card {
-        background: linear-gradient(135deg, #163b87 0%, #2457c5 100%);
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
         padding: 2rem 2.2rem;
         border-radius: 24px;
         color: white;
-        box-shadow: 0 18px 45px rgba(28, 63, 143, 0.18);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5);
         margin-bottom: 1.25rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .hero-title {
         font-size: 2rem;
@@ -43,27 +44,28 @@ st.markdown(
         line-height: 1.6;
     }
     .soft-card {
-        background: rgba(255,255,255,0.88);
-        border: 1px solid rgba(29, 78, 216, 0.08);
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 22px;
         padding: 1.2rem 1.2rem 1rem 1.2rem;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        color: white;
     }
     .metric-card {
-        background: white;
+        background: rgba(255,255,255,0.08);
         border-radius: 18px;
         padding: 1rem 1.1rem;
-        border: 1px solid rgba(15, 23, 42, 0.06);
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         text-align: center;
     }
     .metric-label {
-        color: #5b6475;
+        color: rgba(255,255,255,0.6);
         font-size: 0.92rem;
         margin-bottom: 0.25rem;
     }
     .metric-value {
-        color: #163b87;
+        color: #a78bfa;
         font-size: 1.35rem;
         font-weight: 800;
     }
@@ -92,13 +94,13 @@ st.markdown(
         font-weight: 700;
     }
     div.stButton > button {
-        background: linear-gradient(135deg, #163b87 0%, #2457c5 100%);
+        background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
         color: white;
         border: none;
         border-radius: 14px;
         padding: 0.7rem 1rem;
         font-weight: 700;
-        box-shadow: 0 10px 22px rgba(36, 87, 197, 0.25);
+        box-shadow: 0 10px 22px rgba(124, 58, 237, 0.4);
     }
     div.stButton > button:hover {
         color: white;
