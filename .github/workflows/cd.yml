@@ -45,3 +45,4 @@ jobs:
           region: ${{ secrets.AWS_REGION }}
           port: 8501
           wait-for-service-stability-seconds: 180
+          

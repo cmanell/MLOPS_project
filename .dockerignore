@@ -1,4 +1,4 @@
 test.py
 readme.md
 .git*
-/venv
+/.venv
