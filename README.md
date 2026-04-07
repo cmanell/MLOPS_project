@@ -85,7 +85,7 @@ The application is deployed using:
 ## 🌍 Live application
 https://credit-default-app.victoriouscliff-1f833c45.francecentral.azurecontainerapps.io/
 
-http://13.38.117.90:8501/
+http://15.236.37.169:8501/
 
 ## 📂 Project Repository
 
