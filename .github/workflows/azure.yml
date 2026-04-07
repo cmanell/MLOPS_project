@@ -1,9 +1,9 @@
-name: CD
+name: Deploy to azure
 
 on:
   push:
     branches:
-      - develop_Talib
+      - main
 
 jobs:
   deploy:

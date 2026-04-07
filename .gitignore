@@ -9,3 +9,4 @@ mlflow.db
 *.joblib
 !models/best_model.joblib
 !models/scaler.joblib
+.venv/
